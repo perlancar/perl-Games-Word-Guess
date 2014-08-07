@@ -131,6 +131,8 @@ Number of words per game.
 
 =item * Colors
 
+=item * Add timeout for each guess
+
 =back
 
 
