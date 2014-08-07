@@ -24,6 +24,9 @@ sub new {
         if (($ENV{LANG} // "") =~ /^id/ && "KBBI" ~~ @wls) {
             $wl = "KBBI";
         } else {
+            if (@wls > 1) {
+                @wls = grep {$_ ne 'KBBI'} @wls;
+            }
             $wl = $wls[rand @wls];
         }
     }
