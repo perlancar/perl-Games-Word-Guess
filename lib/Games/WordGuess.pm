@@ -37,7 +37,7 @@ sub new {
     {
         my $wlobj = $mod->new;
         my $l1 = int($attrs{min_len} // 5);
-        my $l2 = int($attrs{max_len} // 5);
+        my $l2 = int($attrs{max_len} // $l1 // 5);
         @words = $wlobj->words_like(qr/\A[a-z]{$l1,$l2}\z/);
         die "Can't find any eligible words in wordlist '$wl'"
             unless @words;
