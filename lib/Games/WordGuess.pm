@@ -57,7 +57,7 @@ sub run {
     $self->{score} = 0;
 
     for my $i (1..$self->{num_words}) {
-        print "\nWord $i:\n";
+        print "\nWord $i/$self->{num_words}:\n";
         my ($is_correct, $score) = $self->ask_word;
         $self->{num_correct}++ if $is_correct;
         $self->{score} += $score;
