@@ -173,3 +173,6 @@ sub show_final_score {
 =head1 SEE ALSO
 
 L<wordguess>
+
+L<Games::GuessWord> which is more akin to Hangman but, at the time of this
+writing, does not come with a readily-playable game.
