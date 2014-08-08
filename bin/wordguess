@@ -31,7 +31,7 @@ $game->run;
 
 Run game:
 
- % wordguess ; # defaults: word length 5, 5 guesses/word, 10 words, wordlist SGB
+ % wordguess ; # defaults: word length 5, 5 guesses/word, 10 words, wordlist Enable
 
 Customize some options (wordlist is Games::Word::Wordlist::* module):
 
@@ -119,7 +119,7 @@ have a 6-character word, the default is 6).
 
 Select wordlist. Wordlists are searched in C<Games::Word::Wordlist::*> modules.
 Two default wordlist are used: KBBI (if running under Indonesian locale), or
-SGB.
+Enable.
 
 Only words containing the lowercase latin letter a-z are used.
 
