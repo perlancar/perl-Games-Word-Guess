@@ -3,7 +3,7 @@
 # DATE
 # VERSION
 
-use Games::WordGuess;
+use Games::Word::Guess;
 use Getopt::Long qw(:config bundling auto_version auto_help);
 
 my %opts = (
@@ -21,7 +21,7 @@ GetOptions(
     'num-words|w=i'   => \$opts{num_words},
 );
 
-my $game = Games::WordGuess->new(%opts);
+my $game = Games::Word::Guess->new(%opts);
 $game->run;
 
 # ABSTRACT: Word guess game

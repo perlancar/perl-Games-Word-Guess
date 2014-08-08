@@ -1,4 +1,4 @@
-package Games::WordGuess;
+package Games::Word::Guess;
 
 # DATE
 # VERSION

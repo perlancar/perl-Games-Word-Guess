@@ -1,4 +1,11 @@
-Revision history for Games-WordGuess
+Revision history for Games-Word-Guess
+
+0.05    2014-08-08 (SHARYANTO) (not yet released)
+
+        - Rename dist from Games-WordGuess to Games-Word-Guess.
+
+        - Add wordlist: Enable.
+
 
 0.04    2014-08-07 (SHARYANTO)
 
