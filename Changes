@@ -4,7 +4,8 @@ Revision history for Games-Word-Guess
 
         - Rename dist from Games-WordGuess to Games-Word-Guess.
 
-        - Add wordlist: Enable.
+        - Change wordlist: SGB with Enable because SGB only contains 5-letter
+          words.
 
 
 0.04    2014-08-07 (SHARYANTO)

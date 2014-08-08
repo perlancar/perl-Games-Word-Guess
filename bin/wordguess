@@ -132,12 +132,6 @@ Number of words per game.
 
 =over
 
-=item * Switch to another English wordlist
-
-One that, unlike SGB, also contains popular words that have lengths other than 5
-letters. Because using wordlist that only contains 5-letter words can lead to a
-rather confusing error message ("Sorry, not a word"):
-
 =item * Write statistics file
 
 =item * Colors
