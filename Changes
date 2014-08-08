@@ -1,8 +1,9 @@
 Revision history for Games-Word-Guess
 
-0.05    2014-08-08 (SHARYANTO) (not yet released)
+0.05    2014-08-08 (SHARYANTO)
 
-        - Rename dist from Games-WordGuess to Games-Word-Guess.
+        - Rename dist from Games-WordGuess to Games-Word-Guess, because the
+          former is already reserved on PAUSE.
 
         - Change wordlist: SGB with Enable because SGB only contains 5-letter
           words.
