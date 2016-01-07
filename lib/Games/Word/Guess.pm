@@ -16,38 +16,27 @@ sub new {
     my %attrs = @_;
 
     # select and load default wordlist
-    my $mods = list_modules("Games::Word::Wordlist::", {list_modules=>1});
-    my @wls = map {s/.+:://; $_} keys %$mods;
+    my $mods = list_modules("WordList::", {list_modules=>1, recurse=>1});
+    my @wls = map {s/^WordList:://; $_}
+        grep {!/^WordList::Phrase::/} keys %$mods;
     print "Available wordlists: ", join(", ", @wls), "\n";
     my $wl = $attrs{word_list};
     if (!$wl) {
-        if (($ENV{LANG} // "") =~ /^id/ && "KBBI" ~~ @wls) {
-            $wl = "KBBI";
+        if (($ENV{LANG} // "") =~ /^id/ && "ID::KBBI" ~~ @wls) {
+            $wl = "ID::KBBI";
         } else {
             if (@wls > 1) {
-                @wls = grep {$_ ne 'KBBI'} @wls;
+                @wls = grep {$_ ne 'ID::KBBI'} @wls;
             }
             $wl = $wls[rand @wls];
         }
     }
     die "Can't find module for wordlist '$wl'" unless $wl ~~ @wls;
-    my $mod = "Games::Word::Wordlist::$wl";
+    my $mod = "WordList::$wl";
     load $mod;
-    print "Loaded wordlist from $mod\n";
+    print "Loaded wordlist module $mod\n";
 
-    # select eligible words from the wordlist
-    my @words;
-    {
-        my $wlobj = $mod->new;
-        my $l1 = int($attrs{min_len} // 5);
-        my $l2 = int($attrs{max_len} // $l1 // 5);
-        @words = $wlobj->words_like(qr/\A[a-z]{$l1,$l2}\z/);
-        die "Can't find any eligible words in wordlist '$wl'"
-            unless @words;
-        $attrs{_wlobj} = $wlobj;
-        $attrs{words} = \@words;
-    }
-
+    $attrs{_wlobj} = $mod->new;
     $attrs{num_words} //= 10;
 
     bless \%attrs, $class;
@@ -71,8 +60,21 @@ sub run {
 sub ask_word {
     my $self = shift;
 
-    my $words = $self->{words};
-    my $word  = $words->[rand @$words];
+    my $word;
+  PICK:
+    {
+        my $l1 = int($self->{min_len} // 5);
+        my $l2 = int($self->{max_len} // $l1 // 5);
+        my $tries = 0;
+        while (++$tries < 100) {
+            $word = $self->{_wlobj}->pick;
+            if ($word =~ qr/\A[a-z]{$l1,$l2}\z/) {
+                last PICK;
+            }
+        }
+        die "Can't find any eligible words in wordlist '$self->{wl}'";
+    }
+
     #say "D:word=$word";
     my $wlen  = length($word);
 
@@ -86,7 +88,7 @@ sub ask_word {
         print $i < $max_guesses ? "Your guess ($i/$max_guesses)? " :
             "Your last guess? ";
         chomp(my $guess = <STDIN>);
-        unless ($self->{_wlobj}->is_word($guess)) {
+        unless ($self->{_wlobj}->word_exists($guess)) {
             $self->show_diff($word, $gletters);
             print "Sorry, not a word! ";
             $i--;
