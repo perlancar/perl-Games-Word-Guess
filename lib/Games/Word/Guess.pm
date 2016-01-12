@@ -72,7 +72,8 @@ sub ask_word {
                 last PICK;
             }
         }
-        die "Can't find any eligible words in wordlist '$self->{wl}'";
+        die "Can't find any eligible words in wordlist '".
+            ref($self->{_wlobj})."'";
     }
 
     #say "D:word=$word";
