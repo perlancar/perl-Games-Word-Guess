@@ -18,7 +18,7 @@ sub new {
     # select and load default wordlist
     my $mods = list_modules("WordList::", {list_modules=>1, recurse=>1});
     my @wls = map {s/^WordList:://; $_}
-        grep {!/^WordList::Phrase::/} keys %$mods;
+        grep {!/^WordList::{Test,Phrase}::/} keys %$mods;
     print "Available wordlists: ", join(", ", @wls), "\n";
     my $wl = $attrs{word_list};
     if (!$wl) {
