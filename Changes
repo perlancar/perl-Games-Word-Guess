@@ -1,5 +1,3 @@
-Revision history for Games-Word-Guess
-
 0.08    2016-01-12 (PERLANCAR)
 
 	- Skip WordList::Test::* by default.
