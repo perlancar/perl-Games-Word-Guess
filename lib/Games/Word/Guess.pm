@@ -1,3 +1,5 @@
+## no critic (ControlStructures::ProhibitMutatingListFunctions)
+
 package Games::Word::Guess;
 
 # AUTHORITY

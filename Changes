@@ -1,3 +1,8 @@
+0.090   2021-03-14  Released-By: PERLANCAR; Urgency: medium
+
+	- Adjust to newer WordList (pick() returns a list).
+
+
 0.08    2016-01-12  Released-By: PERLANCAR
 
 	- Skip WordList::Test::* by default.
