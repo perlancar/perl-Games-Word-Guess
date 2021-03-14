@@ -2,6 +2,8 @@
 
 	- Adjust to newer WordList (pick() returns a list).
 
+        - Skip WordList::ZH::*, WordList::Char::* by default.
+
 
 0.08    2016-01-12  Released-By: PERLANCAR
 
