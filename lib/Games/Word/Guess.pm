@@ -1,12 +1,15 @@
 package Games::Word::Guess;
 
+# AUTHORITY
 # DATE
+# DIST
 # VERSION
 
 use 5.010001;
 use strict;
 use warnings;
 use experimental 'smartmatch';
+use Log::ger;
 
 use Module::List qw(list_modules);
 use Module::Load;
@@ -18,12 +21,14 @@ sub new {
     # select and load default wordlist
     my $mods = list_modules("WordList::", {list_modules=>1, recurse=>1});
     my @wls = map {s/^WordList:://; $_}
-        grep {!/^WordList::(Test|Phrase)::/} keys %$mods;
+        grep {!/^WordList::(Char|Test|Phrase|ZH)::/} keys %$mods;
     print "Available wordlists: ", join(", ", @wls), "\n";
     my $wl = $attrs{word_list};
     if (!$wl) {
-        if (($ENV{LANG} // "") =~ /^id/ && "ID::KBBI" ~~ @wls) {
+        if (($ENV{LANG} // "") =~ /^en/ && "ID::KBBI" ~~ @wls) {
             $wl = "ID::KBBI";
+        } elsif (($ENV{LANG} // "") =~ /^id/ && "EN::Enable" ~~ @wls) {
+            $wl = "EN::Enable";
         } else {
             if (@wls > 1) {
                 @wls = grep {$_ ne 'ID::KBBI'} @wls;
@@ -67,7 +72,8 @@ sub ask_word {
         my $l2 = int($self->{max_len} // $l1 // 5);
         my $tries = 0;
         while (++$tries < 100) {
-            $word = $self->{_wlobj}->pick;
+            ($word) = $self->{_wlobj}->pick;
+            log_trace "Got word: $word";
             if ($word =~ qr/\A[a-z]{$l1,$l2}\z/) {
                 last PICK;
             }
