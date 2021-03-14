@@ -1,3 +1,11 @@
+0.091   2021-03-14  Released-By: PERLANCAR; Urgency: low
+
+	- No functional changes.
+
+	- [doc] Update description; wordlists are now searched from
+	  WordList::*, not Games::Word::Wordlist::*.
+
+
 0.090   2021-03-14  Released-By: PERLANCAR; Urgency: medium
 
 	- Adjust to newer WordList (pick() returns a list).
